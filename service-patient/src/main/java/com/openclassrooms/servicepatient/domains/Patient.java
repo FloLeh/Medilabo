@@ -28,4 +28,13 @@ public class Patient {
 
     private String phone;
 
+    public void update(Patient patient) {
+        firstName = patient.getFirstName();
+        lastName = patient.getLastName();
+        birthdate = patient.getBirthdate();
+        gender = patient.getGender();
+        address = patient.getAddress();
+        phone = patient.getPhone();
+    }
+
 }

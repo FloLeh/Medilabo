@@ -6,6 +6,6 @@ CREATE TABLE patient (
                          last_name VARCHAR(100) NOT NULL,
                          birthdate DATE NOT NULL,
                          gender CHAR(1) NOT NULL,
-                         address VARCHAR(255) NOT NULL,
-                         phone VARCHAR(20) NOT NULL
+                         address VARCHAR(255),
+                         phone VARCHAR(20)
 );
