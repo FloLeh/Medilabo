@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liste des patients</title>
+</head>
+<body>
+<h1>Patients</h1>
+<ul>
+    <li th:each="p : ${patients}" th:text="${p}"></li>
+</ul>
+</body>
+</html>
