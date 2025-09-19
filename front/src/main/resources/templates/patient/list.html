@@ -3,12 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Liste des patients</title>
 </head>
-<body>
-<h1>Patients</h1>
-<ul>
-    <li th:each="p : ${patients}" th:text="${p}"></li>
-</ul>
+<body class="px-10">
+<h1 class="">Patients</h1>
+<table class="table-auto border-collapse border border-gray-300 w-full">
+    <thead class="bg-gray-100">
+    <tr>
+        <th class="border border-gray-300 px-4 py-2">Prénom</th>
+        <th class="border border-gray-300 px-4 py-2">Nom</th>
+        <th class="border border-gray-300 px-4 py-2">Date de naissance</th>
+        <th class="border border-gray-300 px-4 py-2">Genre</th>
+        <th class="border border-gray-300 px-4 py-2">Adresse postale</th>
+        <th class="border border-gray-300 px-4 py-2">Numéro de téléphone</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${patients}" class="hover:bg-gray-50">
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.firstName}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.lastName}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.birthdate}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.gender}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.address}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.phone}"></td>
+        <td class="border border-gray-300 px-4 py-2 text-center">
+            <div class="flex justify-center gap-2">
+                <button class="py-2 px-5 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <form th:action="@{/patient(id=${p.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="py-2 px-5 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
