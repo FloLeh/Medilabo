@@ -8,7 +8,14 @@
     <title>Liste des patients</title>
 </head>
 <body class="px-10">
-<h1 class="">Patients</h1>
+<h1 class="text-2xl font-bold mb-4">Patients</h1>
+<div class="flex justify-end mb-4">
+    <a href="/patient/add"
+       class="py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-600 cursor-pointer flex items-center gap-2">
+        <i class="fa-solid fa-plus"></i>
+        Ajouter un patient
+    </a>
+</div>
 <table class="table-auto border-collapse border border-gray-300 w-full">
     <thead class="bg-gray-100">
     <tr>
@@ -25,15 +32,16 @@
     <tr th:each="p : ${patients}" class="hover:bg-gray-50">
         <td class="border border-gray-300 px-4 py-2" th:text="${p.firstName}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.lastName}"></td>
-        <td class="border border-gray-300 px-4 py-2" th:text="${p.birthdate}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${p.formattedBirthdate()}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.gender}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.address}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.phone}"></td>
         <td class="border border-gray-300 px-4 py-2 text-center">
             <div class="flex justify-center gap-2">
-                <button class="py-2 px-5 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
+                <a th:href="@{/patient/edit(id=${p.id})}"
+                   class="py-2 px-5 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer flex items-center justify-center">
                     <i class="fa-solid fa-pen"></i>
-                </button>
+                </a>
                 <form th:action="@{/patient(id=${p.id})}" method="post">
                     <input type="hidden" name="_method" value="delete"/>
                     <button class="py-2 px-5 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">
