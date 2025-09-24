@@ -16,10 +16,10 @@ public interface PatientClient {
     Patient getPatientById(@RequestParam Long id);
 
     @PostMapping("/patient")
-    void createPatient(@ModelAttribute Patient patient);
+    Patient createPatient(@ModelAttribute Patient patient);
 
     @PutMapping("/patient")
-    void updatePatient(@ModelAttribute Patient patient, @RequestParam Long id);
+    Patient updatePatient(@ModelAttribute Patient patient, @RequestParam Long id);
 
     @DeleteMapping("/patient")
     void deletePatient(@RequestParam Long id);
