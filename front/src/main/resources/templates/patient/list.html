@@ -32,7 +32,7 @@
     <tr th:each="p : ${patients}" class="hover:bg-gray-50">
         <td class="border border-gray-300 px-4 py-2" th:text="${p.firstName}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.lastName}"></td>
-        <td class="border border-gray-300 px-4 py-2" th:text="${p.formattedBirthdate()}"></td>
+        <td class="border border-gray-300 px-4 py-2" th:text="${#temporals.format(p.birthdate, 'dd/MM/yyyy')}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.gender}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.address}"></td>
         <td class="border border-gray-300 px-4 py-2" th:text="${p.phone}"></td>

@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -20,7 +20,7 @@ public class Patient {
 
     private String lastName;
 
-    private Date birthdate;
+    private LocalDate birthdate;
 
     private String gender;
 
