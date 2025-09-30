@@ -5,17 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-class PatientClientUnitTest {
+class PatientClientTest {
 
     private PatientClient patientClient;
-
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @BeforeEach
     void setUp() {
@@ -23,12 +21,12 @@ class PatientClientUnitTest {
     }
 
     @Test
-    void getPatientById_shouldReturnPatient() throws Exception {
+    void getPatientById_shouldReturnPatient() {
         Patient mockPatient = new Patient(
                 1L,
                 "John",
                 "Doe",
-                sdf.parse("2000-01-01"),
+                LocalDate.of(2000, 1, 1),
                 "M",
                 "123 Street",
                 "0123456789"
@@ -44,18 +42,18 @@ class PatientClientUnitTest {
         assertThat(patient.gender()).isEqualTo("M");
         assertThat(patient.address()).isEqualTo("123 Street");
         assertThat(patient.phone()).isEqualTo("0123456789");
-        assertThat(sdf.format(patient.birthdate())).isEqualTo("2000-01-01");
+        assertThat(patient.birthdate()).isEqualTo("2000-01-01");
 
         verify(patientClient, times(1)).getPatientById(1L);
     }
 
     @Test
-    void getPatientsList_shouldReturnList() throws Exception {
+    void getPatientsList_shouldReturnList() {
         Patient mockPatient = new Patient(
                 1L,
                 "John",
                 "Doe",
-                sdf.parse("2000-01-01"),
+                LocalDate.of(1990, 1, 1),
                 "M",
                 "123 Street",
                 "0123456789"
@@ -72,12 +70,12 @@ class PatientClientUnitTest {
     }
 
     @Test
-    void createPatient_shouldReturnCreatedPatient() throws Exception {
+    void createPatient_shouldReturnCreatedPatient() {
         Patient newPatient = new Patient(
                 null,
                 "Alice",
                 "Smith",
-                sdf.parse("1995-05-05"),
+                LocalDate.of(1995, 5, 5),
                 "F",
                 "",
                 ""
@@ -87,7 +85,7 @@ class PatientClientUnitTest {
                 2L,
                 "Alice",
                 "Smith",
-                sdf.parse("1995-05-05"),
+                LocalDate.of(1995, 5, 5),
                 "F",
                 "",
                 ""
@@ -106,12 +104,12 @@ class PatientClientUnitTest {
     }
 
     @Test
-    void updatePatient_shouldReturnUpdatedPatient() throws Exception {
+    void updatePatient_shouldReturnUpdatedPatient() {
         Patient updatedPatient = new Patient(
                 1L,
                 "John",
                 "Updated",
-                sdf.parse("2000-01-01"),
+                LocalDate.of(2000, 1, 1),
                 "M",
                 "123 Street",
                 "0123456789"

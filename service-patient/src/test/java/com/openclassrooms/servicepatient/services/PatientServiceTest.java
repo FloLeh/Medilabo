@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -28,16 +29,14 @@ public class PatientServiceTest {
     private PatientServiceImpl patientService;
 
     private Patient patient;
-    private final Calendar calendar = Calendar.getInstance();
 
     @BeforeEach
     void setUp() {
-        calendar.set(1990, Calendar.JANUARY, 1);
         patient = new Patient();
         patient.setId(1L);
         patient.setFirstName("John");
         patient.setLastName("Doe");
-        patient.setBirthdate(calendar.getTime());
+        patient.setBirthdate(LocalDate.of(1990, 1, 1));
         patient.setGender("M");
     }
 
@@ -91,7 +90,7 @@ public class PatientServiceTest {
         Patient newPatient = new Patient();
         newPatient.setFirstName("Jane");
         newPatient.setLastName("Smith");
-        newPatient.setBirthdate(calendar.getTime());
+        newPatient.setBirthdate(LocalDate.of(1990, 1, 1));
         newPatient.setGender("F");
 
         when(patientRepository.save(any(Patient.class))).thenReturn(newPatient);

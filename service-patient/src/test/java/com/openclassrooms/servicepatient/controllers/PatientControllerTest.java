@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -38,15 +38,12 @@ public class PatientControllerTest {
 
     @BeforeEach
     void setUp() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(1990, Calendar.JANUARY, 1);
-
         patient = new Patient();
         patient.setId(1L);
         patient.setFirstName("John");
         patient.setLastName("Doe");
         patient.setGender("M");
-        patient.setBirthdate(cal.getTime());
+        patient.setBirthdate(LocalDate.of(1990, 1, 1));
     }
 
     @Test
@@ -64,7 +61,7 @@ public class PatientControllerTest {
     void getPatientById_ShouldReturnPatient() throws Exception {
         when(patientService.findById(1L)).thenReturn(patient);
 
-        mockMvc.perform(get("/patient").param("id", "1"))
+        mockMvc.perform(get("/patients/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.lastName").value("Doe"));
     }
@@ -73,7 +70,7 @@ public class PatientControllerTest {
     void createPatient_ShouldReturnCreatedPatient() throws Exception {
         when(patientService.create(any(Patient.class))).thenReturn(patient);
 
-        mockMvc.perform(post("/patient")
+        mockMvc.perform(post("/patients")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(patient)))
                 .andExpect(status().isOk())
@@ -86,8 +83,7 @@ public class PatientControllerTest {
     void updatePatient_ShouldReturnUpdatedPatient() throws Exception {
         when(patientService.update(any(Patient.class), eq(1L))).thenReturn(patient);
 
-        mockMvc.perform(put("/patient")
-                        .param("id", "1")
+        mockMvc.perform(put("/patients/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(patient)))
                 .andExpect(status().isOk())
@@ -98,10 +94,9 @@ public class PatientControllerTest {
 
     @Test
     void deletePatient_ShouldCallService() throws Exception {
-        mockMvc.perform(delete("/patient").param("id", "1"))
+        mockMvc.perform(delete("/patients/{id}", 1L))
                 .andExpect(status().isOk());
 
         verify(patientService).deleteById(1L);
     }
-
 }
