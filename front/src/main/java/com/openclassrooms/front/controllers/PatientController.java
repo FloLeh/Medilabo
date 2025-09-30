@@ -19,36 +19,36 @@ public class PatientController {
     public String patientsList(Model model) {
         List<Patient> patients = patientService.getPatientsList();
         model.addAttribute("patients", patients);
-        return "patient/list";
+        return "patients/list";
     }
 
-    @GetMapping("/patient/add")
+    @GetMapping("/patients/add")
     public String addPatientPage(Model model) {
         model.addAttribute("patient", new Patient(null, "", "", null, "", "", ""));
-        return "patient/add";
+        return "patients/add";
     }
 
-    @PostMapping("/patient")
+    @PostMapping("/patients")
     public String addPatient(@ModelAttribute Patient patient) {
         patientService.createPatient(patient);
         return "redirect:/patients";
     }
 
-    @GetMapping("/patient/edit")
-    public String updatePatientPage(@RequestParam Long id, Model model) {
+    @GetMapping("/patients/edit/{id}")
+    public String updatePatientPage(@PathVariable Long id, Model model) {
         Patient patient = patientService.getPatientById(id);
         model.addAttribute("patient", patient);
-        return "patient/edit";
+        return "patients/edit";
     }
 
-    @PutMapping("/patient")
-    public String updatePatient(@ModelAttribute Patient patient, @RequestParam Long id) {
+    @PutMapping("/patients/{id}")
+    public String updatePatient(@ModelAttribute Patient patient, @PathVariable Long id) {
         patientService.updatePatient(patient, id);
         return "redirect:/patients";
     }
 
-    @DeleteMapping("/patient")
-    public String deletePatient(@RequestParam Long id) {
+    @DeleteMapping("/patients/{id}")
+    public String deletePatient(@PathVariable Long id) {
         patientService.deletePatient(id);
         return "redirect:/patients";
     }

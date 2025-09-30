@@ -12,16 +12,16 @@ public interface PatientClient {
     @GetMapping("/patients")
     List<Patient> getPatientsList();
 
-    @GetMapping("/patient")
-    Patient getPatientById(@RequestParam Long id);
+    @GetMapping("/patients/{id}")
+    Patient getPatientById(@PathVariable Long id);
 
-    @PostMapping("/patient")
+    @PostMapping("/patients")
     Patient createPatient(@ModelAttribute Patient patient);
 
-    @PutMapping("/patient")
-    Patient updatePatient(@ModelAttribute Patient patient, @RequestParam Long id);
+    @PutMapping("/patients/{id}")
+    Patient updatePatient(@ModelAttribute Patient patient, @PathVariable Long id);
 
-    @DeleteMapping("/patient")
-    void deletePatient(@RequestParam Long id);
+    @DeleteMapping("/patients/{id}")
+    void deletePatient(@PathVariable Long id);
 
 }

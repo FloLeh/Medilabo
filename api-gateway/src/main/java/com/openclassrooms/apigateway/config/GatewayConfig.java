@@ -14,17 +14,9 @@ import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFuncti
 public class GatewayConfig {
 
     @Bean
-    public RouterFunction<ServerResponse> routePatients() {
-        return route("patients")
-                .GET("/patients", http())
-                .before(uri("http://localhost:8081"))
-                .build();
-    }
-
-    @Bean
     public RouterFunction<ServerResponse> routePatient() {
         return route()
-                .path("/patient", builder -> builder
+                .path("/patients", builder -> builder
                         .route(request -> true, http())
                 )
                 .before(uri("http://localhost:8081"))
