@@ -21,12 +21,12 @@ public class PatientServiceImpl implements PatientService {
         return patientClient.getPatientById(id);
     }
 
-    public Patient createPatient(Patient patient) {
-        return patientClient.createPatient(patient);
+    public void createPatient(Patient patient) {
+        patientClient.createPatient(patient);
     }
 
-    public Patient updatePatient(Patient patient, Long id) {
-        return patientClient.updatePatient(patient, id);
+    public void updatePatient(Patient patient, Long id) {
+        patientClient.updatePatient(patient, id);
     }
 
     public void deletePatient(Long id) {

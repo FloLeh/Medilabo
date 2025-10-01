@@ -14,12 +14,8 @@ public class MedicalNoteServiceImpl implements MedicalNoteService {
 
     private final MedicalNoteRepository medicalNoteRepository;
 
-    public List<MedicalNote> getMedicalNotes() {
-        return medicalNoteRepository.findAll();
-    }
-
-    public MedicalNote getMedicalNoteById(String id) {
-        return medicalNoteRepository.findById(id).orElseThrow(() -> new RuntimeException("MedicalNote not found"));
+    public List<MedicalNote> getMedicalNotesByPatientId(Long id) {
+        return medicalNoteRepository.findByPatientId(id);
     }
 
     public void addMedicalNote(MedicalNote medicalNote) {

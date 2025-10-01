@@ -13,14 +13,9 @@ public class MedicalNoteController {
 
     private final MedicalNoteService medicalNoteService;
 
-    @GetMapping("/notes")
-    public List<MedicalNote> getMedicalNotes() {
-        return medicalNoteService.getMedicalNotes();
-    }
-
     @GetMapping("/notes/{id}")
-    public MedicalNote getMedicalNote(@PathVariable String id) {
-        return medicalNoteService.getMedicalNoteById(id);
+    public List<MedicalNote> getMedicalNotesByPatient(@PathVariable Long id) {
+        return medicalNoteService.getMedicalNotesByPatientId(id);
     }
 
     @PostMapping("/notes")

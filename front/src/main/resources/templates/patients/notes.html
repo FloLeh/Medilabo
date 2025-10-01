@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Notes du patient</title>
+</head>
+<body class="px-10">
+<h1 class="text-2xl font-bold mb-4">
+    Notes médicales de
+    <span th:text="${patient.firstName}"></span>
+    <span th:text="${patient.lastName}"></span>
+</h1>
+
+<div class="mb-4">
+    <a th:href="@{/patients}" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-600 cursor-pointer flex items-center gap-2 w-fit">
+        <i class="fa-solid fa-arrow-left"></i>
+        Retour à la liste des patients
+    </a>
+</div>
+
+<div class="mb-6">
+    <form method="post" class="flex gap-2">
+        <input type="text" name="note" placeholder="Nouvelle note..."
+               class="border border-gray-300 rounded px-4 py-2 w-full" required>
+        <input type="hidden" name="patient" th:value="${patient.firstName}"/>
+        <button type="submit"
+                class="py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-600 cursor-pointer flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i>
+            Ajouter
+        </button>
+    </form>
+</div>
+
+<table class="table-auto border-collapse border border-gray-300 w-full">
+    <thead class="bg-gray-100">
+    <tr>
+        <th class="border border-gray-300 px-4 py-2">Notes</th>
+        <th class="border border-gray-300 px-4 py-2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="medicalNote : ${medicalNotes}" class="hover:bg-gray-50">
+        <td class="border border-gray-300 px-4 py-2" th:text="${medicalNote.note}"></td>
+        <td class="border border-gray-300 px-4 py-2 text-center w-16">
+            <form th:action="@{/patients/{patientId}/notes/{id}(patientId=${patient.id}, id=${medicalNote.id})}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="p-2 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer w-8 h-8 flex items-center justify-center">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
