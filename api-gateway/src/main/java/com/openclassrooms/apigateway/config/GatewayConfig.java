@@ -22,4 +22,14 @@ public class GatewayConfig {
                 .before(uri("http://localhost:8081"))
                 .build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> routeNotes() {
+        return route()
+                .path("/notes", builder -> builder
+                        .route(request -> true, http())
+                )
+                .before(uri("http://localhost:8082"))
+                .build();
+    }
 }

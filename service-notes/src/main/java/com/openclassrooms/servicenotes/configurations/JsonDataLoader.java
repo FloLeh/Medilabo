@@ -17,9 +17,10 @@ public class JsonDataLoader {
     @Bean
     CommandLineRunner loadData(MedicalNoteRepository repository, ObjectMapper mapper) {
         return args -> {
-                InputStream input = getClass().getResourceAsStream("/data.json");
-                List<MedicalNote> patients = mapper.readValue(input, new TypeReference<>() {});
-                repository.saveAll(patients);
+            repository.deleteAll();
+            InputStream input = getClass().getResourceAsStream("/data.json");
+            List<MedicalNote> patients = mapper.readValue(input, new TypeReference<>() {});
+            repository.saveAll(patients);
         };
     }
 
