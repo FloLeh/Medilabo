@@ -7,6 +7,8 @@ import com.openclassrooms.servicenotes.repositories.MedicalNoteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
 
 import java.io.InputStream;
 import java.util.List;
@@ -15,11 +17,14 @@ import java.util.List;
 public class JsonDataLoader {
 
     @Bean
-    CommandLineRunner loadData(MedicalNoteRepository repository, ObjectMapper mapper) {
+    CommandLineRunner loadData(final MedicalNoteRepository repository, final ObjectMapper mapper) {
         return args -> {
             repository.deleteAll();
-            InputStream input = getClass().getResourceAsStream("/data.json");
-            List<MedicalNote> patients = mapper.readValue(input, new TypeReference<>() {});
+
+            final ResourceLoader resourceLoader = new DefaultResourceLoader();
+            final InputStream resource = resourceLoader.getResource("classpath:data.json").getInputStream();
+            List<MedicalNote> patients = mapper.readValue(resource, new TypeReference<>() {});
+
             repository.saveAll(patients);
         };
     }
