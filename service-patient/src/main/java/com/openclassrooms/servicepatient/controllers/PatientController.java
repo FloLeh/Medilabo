@@ -9,31 +9,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/patients")
 public class PatientController {
 
     private final PatientService patientService;
 
-    @GetMapping("/patients")
+    @GetMapping
     public List<Patient> getAllPatients() {
         return patientService.findAll();
     }
 
-    @GetMapping("/patients/{id}")
+    @GetMapping("/{id}")
     public Patient getPatientById(@PathVariable Long id) {
         return patientService.findById(id);
     }
 
-    @PostMapping("/patients")
+    @PostMapping
     public Patient createPatient(@RequestBody Patient patient) {
         return patientService.create(patient);
     }
 
-    @PutMapping("/patients/{id}")
+    @PutMapping("/{id}")
     public Patient updatePatient(@RequestBody Patient patient,  @PathVariable Long id) {
         return patientService.update(patient, id);
     }
 
-    @DeleteMapping("/patients/{id}")
+    @DeleteMapping("/{id}")
     public void deletePatient(@PathVariable Long id) {
         patientService.deleteById(id);
     }

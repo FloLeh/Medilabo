@@ -13,12 +13,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/patients")
 public class MedicalNoteController {
 
     private final MedicalNoteService medicalNoteService;
     private final PatientService patientService;
 
-    @GetMapping("/patients/{patientId}/notes")
+    @GetMapping("/{patientId}/notes")
     public String showMedicalNote(@PathVariable Long patientId, Model model) {
         List<MedicalNote> notes = medicalNoteService.getMedicalNoteByPatientId(patientId);
         Patient patient = patientService.getPatientById(patientId);
@@ -27,13 +28,13 @@ public class MedicalNoteController {
         return "/patients/notes";
     }
 
-    @PostMapping("/patients/{patientId}/notes")
+    @PostMapping("/{patientId}/notes")
     public String saveMedicalNote(@ModelAttribute MedicalNote medicalNote, @PathVariable Long patientId) {
         medicalNoteService.saveMedicalNote(medicalNote);
         return "redirect:/patients/" + patientId + "/notes";
     }
 
-    @DeleteMapping("/patients/{patientId}/notes/{id}")
+    @DeleteMapping("/{patientId}/notes/{id}")
     public String deleteMedicalNote(@ModelAttribute MedicalNote medicalNote, @PathVariable Long patientId, @PathVariable String id) {
         medicalNoteService.deleteMedicalNote(id);
         return "redirect:/patients/" + patientId + "/notes";

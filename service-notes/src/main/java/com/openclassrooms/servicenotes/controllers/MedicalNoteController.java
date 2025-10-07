@@ -9,21 +9,22 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/notes")
 public class MedicalNoteController {
 
     private final MedicalNoteService medicalNoteService;
 
-    @GetMapping("/notes/{id}")
+    @GetMapping("/{id}")
     public List<MedicalNote> getMedicalNotesByPatient(@PathVariable Long id) {
         return medicalNoteService.getMedicalNotesByPatientId(id);
     }
 
-    @PostMapping("/notes")
+    @PostMapping
     public void addMedicalNote(@RequestBody MedicalNote medicalNote) {
         medicalNoteService.addMedicalNote(medicalNote);
     }
 
-    @DeleteMapping("/notes/{id}")
+    @DeleteMapping("/{id}")
     public void deleteMedicalNote(@PathVariable String id) {
         medicalNoteService.deleteMedicalNote(id);
     }
