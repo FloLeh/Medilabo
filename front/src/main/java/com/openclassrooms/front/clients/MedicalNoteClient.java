@@ -18,7 +18,4 @@ public interface MedicalNoteClient {
     @PostMapping("/notes")
     void saveMedicalNote(@ModelAttribute MedicalNote medicalNote);
 
-    @DeleteMapping("/notes/{id}")
-    void deleteMedicalNote(@PathVariable String id);
-
 }

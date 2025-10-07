@@ -34,10 +34,4 @@ public class MedicalNoteController {
         return "redirect:/patients/" + patientId + "/notes";
     }
 
-    @DeleteMapping("/{patientId}/notes/{id}")
-    public String deleteMedicalNote(@ModelAttribute MedicalNote medicalNote, @PathVariable Long patientId, @PathVariable String id) {
-        medicalNoteService.deleteMedicalNote(id);
-        return "redirect:/patients/" + patientId + "/notes";
-    }
-
 }

@@ -92,11 +92,4 @@ public class PatientControllerTest {
         verify(patientService).update(any(Patient.class), eq(1L));
     }
 
-    @Test
-    void deletePatient_ShouldCallService() throws Exception {
-        mockMvc.perform(delete("/patients/{id}", 1L))
-                .andExpect(status().isOk());
-
-        verify(patientService).deleteById(1L);
-    }
 }

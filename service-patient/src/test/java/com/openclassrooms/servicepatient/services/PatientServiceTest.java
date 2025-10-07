@@ -122,11 +122,4 @@ public class PatientServiceTest {
         verify(patientRepository).save(patient);
     }
 
-    @Test
-    void deleteById_ShouldCallRepository() {
-        patientService.deleteById(1L);
-
-        verify(patientRepository).deleteById(1L);
-    }
-
 }

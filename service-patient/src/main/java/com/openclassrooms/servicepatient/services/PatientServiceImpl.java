@@ -44,8 +44,4 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.save(patientToUpdate);
     }
 
-    public void deleteById(Long id) {
-        patientRepository.deleteById(id);
-    }
-
 }

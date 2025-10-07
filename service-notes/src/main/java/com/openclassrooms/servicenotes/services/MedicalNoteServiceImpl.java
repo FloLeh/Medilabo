@@ -28,7 +28,4 @@ public class MedicalNoteServiceImpl implements MedicalNoteService {
         medicalNoteRepository.save(medicalNote);
     }
 
-    public void deleteMedicalNote(String id) {
-        medicalNoteRepository.deleteById(id);
-    }
 }

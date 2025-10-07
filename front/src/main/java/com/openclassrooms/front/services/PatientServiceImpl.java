@@ -29,7 +29,4 @@ public class PatientServiceImpl implements PatientService {
         patientClient.updatePatient(patient, id);
     }
 
-    public void deletePatient(Long id) {
-        patientClient.deletePatient(id);
-    }
 }

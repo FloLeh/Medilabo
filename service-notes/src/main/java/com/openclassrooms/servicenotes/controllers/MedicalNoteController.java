@@ -24,9 +24,4 @@ public class MedicalNoteController {
         medicalNoteService.addMedicalNote(medicalNote);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteMedicalNote(@PathVariable String id) {
-        medicalNoteService.deleteMedicalNote(id);
-    }
-
 }

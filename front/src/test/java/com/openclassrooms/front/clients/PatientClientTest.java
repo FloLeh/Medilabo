@@ -124,12 +124,4 @@ class PatientClientTest {
         verify(patientClient, times(1)).updatePatient(updatedPatient, 1L);
     }
 
-    @Test
-    void deletePatient_shouldCallEndpoint() {
-        doNothing().when(patientClient).deletePatient(1L);
-
-        patientClient.deletePatient(1L);
-
-        verify(patientClient, times(1)).deletePatient(1L);
-    }
 }

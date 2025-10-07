@@ -10,6 +10,4 @@ public interface MedicalNoteService {
 
     void saveMedicalNote(MedicalNote medicalNote);
 
-    void deleteMedicalNote(String id);
-
 }

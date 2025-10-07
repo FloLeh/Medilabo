@@ -21,7 +21,4 @@ public class MedicalNoteServiceImpl implements MedicalNoteService {
         medicalNoteClient.saveMedicalNote(medicalNote);
     }
 
-    public void deleteMedicalNote(String id) {
-        medicalNoteClient.deleteMedicalNote(id);
-    }
 }

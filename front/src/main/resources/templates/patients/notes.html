@@ -38,20 +38,11 @@
     <thead class="bg-gray-100">
     <tr>
         <th class="border border-gray-300 px-4 py-2">Notes</th>
-        <th class="border border-gray-300 px-4 py-2">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="medicalNote : ${medicalNotes}" class="hover:bg-gray-50">
         <td class="border border-gray-300 px-4 py-2" th:text="${medicalNote.note}"></td>
-        <td class="border border-gray-300 px-4 py-2 text-center w-16">
-            <form th:action="@{/patients/{patientId}/notes/{id}(patientId=${patient.id}, id=${medicalNote.id})}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
-                <button class="p-2 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer w-8 h-8 flex items-center justify-center">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </form>
-        </td>
     </tr>
     </tbody>
 </table>

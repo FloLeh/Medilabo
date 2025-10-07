@@ -21,7 +21,4 @@ public interface PatientClient {
     @PutMapping("/patients/{id}")
     Patient updatePatient(@ModelAttribute Patient patient, @PathVariable Long id);
 
-    @DeleteMapping("/patients/{id}")
-    void deletePatient(@PathVariable Long id);
-
 }

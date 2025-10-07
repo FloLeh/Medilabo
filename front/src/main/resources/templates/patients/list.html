@@ -26,7 +26,7 @@
         <th class="border border-gray-300 px-4 py-2">Adresse postale</th>
         <th class="border border-gray-300 px-4 py-2">Numéro de téléphone</th>
         <th class="border border-gray-300 px-4 py-2">Notes</th>
-        <th class="border border-gray-300 px-4 py-2 text-center">Actions</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Edit</th>
     </tr>
     </thead>
     <tbody>
@@ -51,12 +51,6 @@
                    class="py-2 px-5 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer flex items-center justify-center">
                     <i class="fa-solid fa-pen"></i>
                 </a>
-                <form th:action="@{/patients/{id}(id=${p.id})}" method="post">
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button class="py-2 px-5 bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </form>
             </div>
         </td>
     </tr>
