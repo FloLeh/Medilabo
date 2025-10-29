@@ -14,6 +14,11 @@ public class MedicalNoteController {
 
     private final MedicalNoteService medicalNoteService;
 
+    @GetMapping
+    public List<MedicalNote> getAllMedicalNotes() {
+        return medicalNoteService.getAllMedicalNotes();
+    }
+
     @GetMapping("/{id}")
     public List<MedicalNote> getMedicalNotesByPatient(@PathVariable Long id) {
         return medicalNoteService.getMedicalNotesByPatientId(id);

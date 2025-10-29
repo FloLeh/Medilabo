@@ -14,6 +14,10 @@ public class MedicalNoteServiceImpl implements MedicalNoteService {
 
     private final MedicalNoteRepository medicalNoteRepository;
 
+    public List<MedicalNote> getAllMedicalNotes() {
+        return medicalNoteRepository.findAll();
+    }
+
     public List<MedicalNote> getMedicalNotesByPatientId(Long id) {
         return medicalNoteRepository.findByPatientId(id);
     }

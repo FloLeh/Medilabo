@@ -32,4 +32,14 @@ public class GatewayConfig {
                 .before(uri("http://localhost:8082"))
                 .build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> routeReports() {
+        return route()
+                .path("/reports", builder -> builder
+                        .route(request -> true, http())
+                )
+                .before(uri("http://localhost:8083"))
+                .build();
+    }
 }
