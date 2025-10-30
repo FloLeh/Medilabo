@@ -6,6 +6,7 @@ import com.openclassrooms.servicereport.DTOs.PatientReportResponse;
 import com.openclassrooms.servicereport.DTOs.PatientWithNotes;
 import com.openclassrooms.servicereport.clients.MedicalNoteClient;
 import com.openclassrooms.servicereport.clients.PatientClient;
+import com.openclassrooms.servicereport.enums.Gender;
 import com.openclassrooms.servicereport.enums.RiskLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -107,19 +108,19 @@ public class ReportServiceImpl implements ReportService {
     }
 
     private static boolean isEarlyOnset(int age, String gender, long triggerCount) {
-        return (age <= ageLimit && gender.equals("M")
+        return (age <= ageLimit && gender.equals(Gender.MALE.value())
                     && triggerCount >= 5)
-                || (age <= ageLimit && gender.equals("F")
+                || (age <= ageLimit && gender.equals(Gender.FEMALE.value())
                     && triggerCount >= 7)
                 || (age > ageLimit
                     && triggerCount >= 8);
     }
 
     private static boolean isInDanger(int age, String gender, long triggerCount) {
-        return (age <= ageLimit && gender.equals("M")
+        return (age <= ageLimit && gender.equals(Gender.MALE.value())
                     && triggerCount >= 3
                     && triggerCount < 5)
-                || (age <= ageLimit && gender.equals("F")
+                || (age <= ageLimit && gender.equals(Gender.FEMALE.value())
                     && triggerCount >= 4
                     && triggerCount < 7)
                 || (age > ageLimit
