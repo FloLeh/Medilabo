@@ -1,5 +1,6 @@
 package com.openclassrooms.apigateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.function.RouterFunction;
@@ -13,13 +14,22 @@ import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFuncti
 @Configuration
 public class GatewayConfig {
 
+    @Value("${service.patients.url}")
+    private String patientsUrl;
+
+    @Value("${service.notes.url}")
+    private String notesUrl;
+
+    @Value("${service.reports.url}")
+    private String reportsUrl;
+
     @Bean
     public RouterFunction<ServerResponse> routePatient() {
         return route()
                 .path("/patients", builder -> builder
                         .route(request -> true, http())
                 )
-                .before(uri("http://localhost:8081"))
+                .before(uri(patientsUrl))
                 .build();
     }
 
@@ -29,7 +39,7 @@ public class GatewayConfig {
                 .path("/notes", builder -> builder
                         .route(request -> true, http())
                 )
-                .before(uri("http://localhost:8082"))
+                .before(uri(notesUrl))
                 .build();
     }
 
@@ -39,7 +49,7 @@ public class GatewayConfig {
                 .path("/reports", builder -> builder
                         .route(request -> true, http())
                 )
-                .before(uri("http://localhost:8083"))
+                .before(uri(reportsUrl))
                 .build();
     }
 }

@@ -25,7 +25,7 @@ public class MedicalNoteController {
         Patient patient = patientService.getPatientById(patientId);
         model.addAttribute("medicalNotes", notes);
         model.addAttribute("patient", patient);
-        return "/patients/notes";
+        return "patients/notes";
     }
 
     @PostMapping("/{patientId}/notes")

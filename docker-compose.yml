@@ -1,0 +1,96 @@
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - service.patients.url=http://service-patient:8081
+      - service.notes.url=http://service-notes:8082
+      - service.reports.url=http://service-report:8083
+    depends_on:
+      - service-patient
+      - service-report
+      - service-notes
+    networks:
+      - backend
+
+  front:
+    build: ./front
+    ports:
+      - "8090:8090"
+    environment:
+      - gateway.url=http://api-gateway:8080
+    depends_on:
+      - api-gateway
+    networks:
+      - frontend
+      - backend
+
+  service-patient:
+    build: ./service-patient
+    ports:
+      - "8081:8081"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql:3306/medilabo
+      - spring.datasource.username=root
+      - spring.datasource.password=root
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=medilabo
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+
+  service-notes:
+    build: ./service-notes
+    ports:
+      - "8082:8082"
+    environment:
+      - spring.data.mongodb.uri=mongodb://mongo:27017/medilabo
+    depends_on:
+      - mongo
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - backend
+
+  service-report:
+    build: ./service-report
+    ports:
+      - "8083:8083"
+    environment:
+      - gateway.url=http://api-gateway:8080
+    networks:
+      - backend
+    depends_on:
+      - service-patient
+      - service-notes
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  mysql_data:
+  mongo_data:
