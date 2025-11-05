@@ -1,45 +1,57 @@
 package com.openclassrooms.servicereport.clients;
 
 import com.openclassrooms.servicereport.DTOs.Patient;
-import org.junit.jupiter.api.BeforeEach;
+import com.openclassrooms.servicereport.enums.Gender;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class PatientClientTest {
 
+    @Mock
     private PatientClient patientClient;
 
-    @BeforeEach
-    void setUp() {
-        patientClient = Mockito.mock(PatientClient.class);
-    }
+    private final Patient MOCK_PATIENT_1 = new Patient(
+            1L,
+            "John",
+            "Doe",
+            LocalDate.of(1980, 1, 1),
+            Gender.MALE.value(),
+            "1 Main St",
+            "555-1234"
+    );
+    private final Patient MOCK_PATIENT_2 = new Patient(
+            2L,
+            "Jane",
+            "Smith",
+            LocalDate.of(1995, 5, 15),
+            Gender.FEMALE.value(),
+            "2 Second Ave",
+            "555-5678"
+    );
+    private final List<Patient> MOCK_PATIENT_LIST = List.of(MOCK_PATIENT_1, MOCK_PATIENT_2);
 
     @Test
-    void getPatientsList_shouldReturnList() {
-        Patient mockPatient = new Patient(
-                1L,
-                "John",
-                "Doe",
-                LocalDate.of(1990, 1, 1),
-                "M",
-                "123 Street",
-                "0123456789"
-        );
+    void getPatientsList_shouldReturnMockedList() {
+        // GIVEN
+        when(patientClient.getPatientsList()).thenReturn(MOCK_PATIENT_LIST);
 
-        when(patientClient.getPatientsList()).thenReturn(List.of(mockPatient));
-
+        // WHEN
         List<Patient> patients = patientClient.getPatientsList();
 
-        assertThat(patients).hasSize(1);
-        assertThat(patients.getFirst().firstName()).isEqualTo("John");
-
-        verify(patientClient, times(1)).getPatientsList();
+        // THEN
+        assertNotNull(patients);
+        assertEquals(2, patients.size());
+        assertEquals("John", patients.get(0).firstName());
+        assertEquals(2L, patients.get(1).id());
     }
-
 }
