@@ -3,6 +3,7 @@ package com.openclassrooms.front.controllers;
 import com.openclassrooms.front.dto.Patient;
 import com.openclassrooms.front.dto.PatientReport;
 import com.openclassrooms.front.dto.PatientWithReportCodeAndLabel;
+import com.openclassrooms.front.enums.Gender;
 import com.openclassrooms.front.enums.RiskLevel;
 import com.openclassrooms.front.services.PatientService;
 import com.openclassrooms.front.services.ReportService;
@@ -46,7 +47,7 @@ public class PatientController {
 
     @GetMapping("/add")
     public String addPatientPage(Model model) {
-        model.addAttribute("patient", new Patient(null, "", "", null, "", "", ""));
+        model.addAttribute("patient", new Patient(null, "", "", null, Gender.F, "", ""));
         return "patients/add";
     }
 

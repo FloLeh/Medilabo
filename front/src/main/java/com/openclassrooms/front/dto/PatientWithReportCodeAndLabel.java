@@ -23,13 +23,12 @@ public record PatientWithReportCodeAndLabel(
                 patient.firstName(),
                 patient.lastName(),
                 patient.birthdate(),
-                patient.gender(),
+                patient.gender().getValue(),
                 patient.address(),
                 patient.phone(),
                 riskCode,
                 riskLabel,
                 switch (riskCode) {
-                    case 1 -> "bg-gray-200 text-gray-800";
                     case 2 -> "bg-yellow-200 text-yellow-800";
                     case 3 -> "bg-orange-400 text-white";
                     case 4 -> "bg-red-500 text-white";

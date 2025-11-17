@@ -7,6 +7,8 @@ services:
       - service.patients.url=http://service-patient:8081
       - service.notes.url=http://service-notes:8082
       - service.reports.url=http://service-report:8083
+      - spring.security.user.name=login
+      - spring.security.user.password=password
     depends_on:
       - service-patient
       - service-report
