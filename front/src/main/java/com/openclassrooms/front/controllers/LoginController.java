@@ -4,9 +4,7 @@ import com.openclassrooms.front.services.AuthService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @Controller
@@ -23,15 +21,10 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String doLogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+    public String doLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
 
-        boolean success = authService.authenticate(username, password, session);
+        authService.authenticate(username, password, session);
 
-        if (success) {
-            return "redirect:/patients";
-        } else {
-            model.addAttribute("error", "Identifiants invalides");
-            return "login";
-        }
+        return "redirect:/patients";
     }
 }

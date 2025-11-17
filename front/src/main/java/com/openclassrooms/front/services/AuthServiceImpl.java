@@ -1,7 +1,5 @@
 package com.openclassrooms.front.services;
 
-import com.openclassrooms.front.clients.AuthClient;
-import feign.FeignException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,18 +11,11 @@ import java.util.Base64;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private final AuthClient authClient;
-
     public boolean authenticate(String username, String password, HttpSession session) {
         String authHeader = buildBasicAuthHeader(username, password);
+        session.setAttribute("AUTH_HEADER", authHeader);
+        return true;
 
-        try {
-            authClient.checkAuth(authHeader);
-            session.setAttribute("AUTH_HEADER", authHeader);
-            return true;
-        } catch (FeignException.Unauthorized e) {
-            return false;
-        }
     }
 
     private String buildBasicAuthHeader(String username, String password) {
