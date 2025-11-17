@@ -10,6 +10,14 @@
 <body class="px-10">
 <h1 class="text-2xl font-bold mb-4">Patients</h1>
 <div class="flex justify-end mb-4">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit"
+                class="w-full bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors cursor-pointer">
+            Se déconnecter
+        </button>
+    </form>
+</div>
+<div class="flex justify-end mb-4">
     <a href="/patients/add"
        class="py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-600 cursor-pointer flex items-center gap-2">
         <i class="fa-solid fa-plus"></i>

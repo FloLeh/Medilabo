@@ -27,4 +27,10 @@ public class LoginController {
 
         return "redirect:/patients";
     }
+
+    @PostMapping("/logout")
+    public String doLogout(HttpSession session) {
+        authService.logout(session);
+        return "redirect:/login";
+    }
 }

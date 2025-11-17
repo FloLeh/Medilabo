@@ -18,6 +18,10 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
+    public void logout(HttpSession session) {
+        session.removeAttribute("AUTH_HEADER");
+    }
+
     private String buildBasicAuthHeader(String username, String password) {
         String token = Base64.getEncoder()
                 .encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
