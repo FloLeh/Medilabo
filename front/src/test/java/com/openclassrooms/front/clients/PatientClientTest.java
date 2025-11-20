@@ -1,6 +1,7 @@
 package com.openclassrooms.front.clients;
 
 import com.openclassrooms.front.dto.Patient;
+import com.openclassrooms.front.enums.Gender;
 import feign.FeignException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ class PatientClientTest {
             "John",
             "Doe",
             LocalDate.of(1980, 1, 1),
-            "M",
+            Gender.M,
             "123 Main St",
             "555-1234"
     );
@@ -90,9 +91,9 @@ class PatientClientTest {
     @Test
     void createPatient_shouldCallClientCreateMethod_andReturnPatient() {
         // GIVEN
-        Patient newPatient = new Patient(null, "New", "User", null, "F", null, null);
+        Patient newPatient = new Patient(null, "New", "User", null, Gender.F, null, null);
 
-        Patient createdPatient = new Patient(2L, "New", "User", null, "F", null, null);
+        Patient createdPatient = new Patient(2L, "New", "User", null, Gender.F, null, null);
         when(patientClient.createPatient(newPatient)).thenReturn(createdPatient);
 
         // WHEN
@@ -107,7 +108,7 @@ class PatientClientTest {
     @Test
     void updatePatient_shouldCallClientUpdateMethod_andReturnUpdatedPatient() {
         // GIVEN
-        Patient updateData = new Patient(PATIENT_ID, "Updated", "Doe", null, "M", null, null);
+        Patient updateData = new Patient(PATIENT_ID, "Updated", "Doe", null, Gender.M, null, null);
 
         when(patientClient.updatePatient(updateData, PATIENT_ID)).thenReturn(updateData);
 

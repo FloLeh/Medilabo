@@ -2,6 +2,7 @@ package com.openclassrooms.front.controllers;
 
 import com.openclassrooms.front.dto.MedicalNote;
 import com.openclassrooms.front.dto.Patient;
+import com.openclassrooms.front.enums.Gender;
 import com.openclassrooms.front.services.MedicalNoteService;
 import com.openclassrooms.front.services.PatientService;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ class MedicalNoteControllerTest {
     private static final String NOTE_ID = "123abc";
 
     private static final Patient MOCK_PATIENT = new Patient(
-            PATIENT_ID, "John", "Doe", LocalDate.of(1980, 1, 1), "M", "123 Main St", "555-1234"
+            PATIENT_ID, "John", "Doe", LocalDate.of(1980, 1, 1), Gender.M, "123 Main St", "555-1234"
     );
 
     private static final MedicalNote MOCK_NOTE = new MedicalNote(

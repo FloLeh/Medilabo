@@ -2,6 +2,7 @@ package com.openclassrooms.front.controllers;
 
 import com.openclassrooms.front.dto.Patient;
 import com.openclassrooms.front.dto.PatientReport;
+import com.openclassrooms.front.enums.Gender;
 import com.openclassrooms.front.services.PatientService;
 import com.openclassrooms.front.services.ReportService;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class PatientControllerTest {
     private static final int RISK_CODE = 2;
 
     private static final Patient MOCK_PATIENT = new Patient(
-            PATIENT_ID, "John", "Doe", LocalDate.of(1980, 1, 1), "M", "123 Main St", "555-1234"
+            PATIENT_ID, "John", "Doe", LocalDate.of(1980, 1, 1), Gender.M, "123 Main St", "555-1234"
     );
     private static final List<Patient> MOCK_PATIENT_LIST = List.of(MOCK_PATIENT);
 

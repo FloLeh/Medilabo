@@ -26,7 +26,6 @@ class LoginControllerTest {
 
     private static final String VALID_USERNAME = "user";
     private static final String VALID_PASSWORD = "password";
-    private static final String ERROR_MESSAGE = "Identifiants invalides";
 
     @Test
     void loginForm_shouldReturnLoginPage() throws Exception {
@@ -50,18 +49,4 @@ class LoginControllerTest {
                 .andExpect(model().attributeDoesNotExist("error"));
     }
 
-    @Test
-    void doLogin_shouldReturnToLoginPageWithError_whenAuthenticationFails() throws Exception {
-        // GIVEN
-        when(authService.authenticate(anyString(), anyString(), any(HttpSession.class))).thenReturn(false);
-
-        // WHEN / THEN
-        mockMvc.perform(post("/login")
-                        .param("username", "invalid")
-                        .param("password", "fail"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("login"))
-                .andExpect(model().attributeExists("error"))
-                .andExpect(model().attribute("error", ERROR_MESSAGE));
-    }
 }

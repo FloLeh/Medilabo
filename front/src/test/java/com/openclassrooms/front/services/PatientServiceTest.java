@@ -2,6 +2,7 @@ package com.openclassrooms.front.services;
 
 import com.openclassrooms.front.clients.PatientClient;
 import com.openclassrooms.front.dto.Patient;
+import com.openclassrooms.front.enums.Gender;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +32,7 @@ class PatientServiceTest {
             "John",
             "Doe",
             LocalDate.of(1980, 1, 1),
-            "M",
+            Gender.M,
             "123 Main St",
             "555-1234"
     );
@@ -87,7 +88,7 @@ class PatientServiceTest {
                 "Jane",
                 "Doe",
                 LocalDate.of(1985, 5, 5),
-                "F",
+                Gender.F,
                 "456 Other Blvd",
                 "555-4321"
         );
